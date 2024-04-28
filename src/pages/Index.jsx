@@ -1,4 +1,4 @@
-import { Box, Button, Flex, Heading, Input, Table, Thead, Tbody, Tr, Th, Td, Text, VStack } from "@chakra-ui/react";
+import { Box, Button, Flex, Heading, Input, Table, Thead, Tbody, Tr, Th, Td, Text, VStack, Link } from "@chakra-ui/react";
 import { FaPlus, FaTrash } from "react-icons/fa";
 import { useState } from "react";
 
@@ -45,7 +45,11 @@ const Index = () => {
           <Tbody>
             {projects.map((project) => (
               <Tr key={project.id}>
-                <Td>{project.name}</Td>
+                <Td>
+                  <Link to={`/project/${project.id}`} state={{ project }}>
+                    {project.name}
+                  </Link>
+                </Td>
                 <Td>{project.description}</Td>
                 <Td>{project.deadline}</Td>
                 <Td>
