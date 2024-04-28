@@ -1,4 +1,4 @@
-import { Box, Button, Flex, Heading, Input, List, ListItem, Text, VStack } from "@chakra-ui/react";
+import { Box, Button, Flex, Heading, Input, Table, Thead, Tbody, Tr, Th, Td, Text, VStack } from "@chakra-ui/react";
 import { FaPlus, FaTrash } from "react-icons/fa";
 import { useState } from "react";
 
@@ -27,18 +27,26 @@ const Index = () => {
         </Button>
       </Flex>
       <Box w="100%">
-        <List spacing={3}>
-          {projects.map((project) => (
-            <ListItem key={project.id} p={2} shadow="md" borderWidth="1px">
-              <Flex justifyContent="space-between" alignItems="center">
-                <Text fontSize="xl">{project.name}</Text>
-                <Button size="sm" colorScheme="red" onClick={() => handleDeleteProject(project.id)}>
-                  <FaTrash />
-                </Button>
-              </Flex>
-            </ListItem>
-          ))}
-        </List>
+        <Table variant="simple">
+          <Thead>
+            <Tr>
+              <Th>Project Name</Th>
+              <Th>Actions</Th>
+            </Tr>
+          </Thead>
+          <Tbody>
+            {projects.map((project) => (
+              <Tr key={project.id}>
+                <Td>{project.name}</Td>
+                <Td>
+                  <Button size="sm" colorScheme="red" onClick={() => handleDeleteProject(project.id)}>
+                    <FaTrash />
+                  </Button>
+                </Td>
+              </Tr>
+            ))}
+          </Tbody>
+        </Table>
       </Box>
     </VStack>
   );
