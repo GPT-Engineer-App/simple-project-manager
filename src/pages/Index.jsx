@@ -5,10 +5,14 @@ import { useState } from "react";
 const Index = () => {
   const [projects, setProjects] = useState([]);
   const [newProjectName, setNewProjectName] = useState("");
+  const [newProjectDescription, setNewProjectDescription] = useState("");
+  const [newProjectDeadline, setNewProjectDeadline] = useState("");
 
   const handleAddProject = () => {
     if (newProjectName.trim() !== "") {
-      setProjects([...projects, { id: Date.now(), name: newProjectName }]);
+      setProjects([...projects, { id: Date.now(), name: newProjectName, description: newProjectDescription, deadline: newProjectDeadline }]);
+      setNewProjectDescription("");
+      setNewProjectDeadline("");
       setNewProjectName("");
     }
   };
@@ -22,6 +26,8 @@ const Index = () => {
       <Heading>Project Management App</Heading>
       <Flex>
         <Input placeholder="Enter new project name" value={newProjectName} onChange={(e) => setNewProjectName(e.target.value)} />
+        <Input placeholder="Enter project description" value={newProjectDescription} onChange={(e) => setNewProjectDescription(e.target.value)} ml={2} />
+        <Input placeholder="Enter project deadline" value={newProjectDeadline} onChange={(e) => setNewProjectDeadline(e.target.value)} ml={2} />
         <Button leftIcon={<FaPlus />} colorScheme="blue" onClick={handleAddProject} ml={2}>
           Add Project
         </Button>
@@ -31,6 +37,8 @@ const Index = () => {
           <Thead>
             <Tr>
               <Th>Project Name</Th>
+              <Th>Description</Th>
+              <Th>Deadline</Th>
               <Th>Actions</Th>
             </Tr>
           </Thead>
@@ -38,6 +46,8 @@ const Index = () => {
             {projects.map((project) => (
               <Tr key={project.id}>
                 <Td>{project.name}</Td>
+                <Td>{project.description}</Td>
+                <Td>{project.deadline}</Td>
                 <Td>
                   <Button size="sm" colorScheme="red" onClick={() => handleDeleteProject(project.id)}>
                     <FaTrash />
